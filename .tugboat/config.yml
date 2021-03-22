@@ -13,6 +13,9 @@ services:
         # This is an environment variable we added in the Dockerfile that
         # provides the path to Drupal composer root (not the web root).
         cd $DRUPAL_COMPOSER_ROOT
+        rm composer.*
+        wget https://raw.githubusercontent.com/goalgorilla/social_template/master/composer.json
+        wget https://raw.githubusercontent.com/goalgorilla/social_template/master/composer.lock
         # We configure the Drupal project to use the checkout of the module as a
         # Composer package repository.
         composer config repositories.tugboat vcs $TUGBOAT_ROOT
@@ -29,10 +32,11 @@ services:
           site:install open_social
 
         # Set up the files directory permissions.
-        mkdir -p $DRUPAL_DOCROOT/sites/default/files
-        chgrp -R www-data $DRUPAL_DOCROOT/sites/default/files
-        chmod 2775 $DRUPAL_DOCROOT/sites/default/files
-        chmod -R g+w $DRUPAL_DOCROOT/sites/default/files
+        mkdir -p /var/www/drupal/html/sites/default/files
+        chgrp -R www-data /var/www/drupal/html/sites/default/files
+        chmod 2775 /var/www/drupal/html/sites/default/files
+        chmod -R g+w /var/www/drupal/html/sites/default/files
+        ln -snf /var/www/drupal/html $DOCROOT
 
       build: |
         set -eux
