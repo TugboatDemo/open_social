@@ -5,6 +5,9 @@ services:
     depends:
       - mysql
     commands:
+      init:
+        - echo "memory_limit = 512M" >> /usr/local/etc/php/conf.d/my-php.ini
+
       update: |
         set -eux
         # Check out a branch using the unique Tugboat ID for this repository, to
