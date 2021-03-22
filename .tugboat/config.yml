@@ -30,7 +30,7 @@ services:
           --db-url=mysql://tugboat:tugboat@mysql:3306/tugboat \
           --site-name="Open Social" \
           --account-pass=${ADMIN_PASSWORD} \
-          site:install open_social
+          site:install social
 
         # Set up the files directory permissions.
         mkdir -p /var/www/drupal/html/sites/default/files
