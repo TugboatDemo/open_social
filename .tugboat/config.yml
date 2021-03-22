@@ -14,6 +14,7 @@ services:
         # provides the path to Drupal composer root (not the web root).
         cd $DRUPAL_COMPOSER_ROOT
         rm composer.*
+        rm -rf web
         wget https://raw.githubusercontent.com/goalgorilla/social_template/master/composer.json
         wget https://raw.githubusercontent.com/goalgorilla/social_template/master/composer.lock
         # We configure the Drupal project to use the checkout of the module as a
@@ -21,7 +22,7 @@ services:
         composer config repositories.tugboat vcs $TUGBOAT_ROOT
         # Now we can require this theme, specifing the branch name we created
         # above that uses the $TUGBOAT_REPO_ID environment variable.
-        composer require goalgorilla/open_social:dev-$TUGBOAT_REPO_ID
+        composer require goalgorilla/open_social:dev-$TUGBOAT_REPO_ID drush/drush
 
         # Install Drupal on the site.
         vendor/bin/drush \
