@@ -1,11 +1,11 @@
 services:
   php:
-    image: q0rban/tugboat-drupal:8
+    image: q0rban/tugboat-drupal:8.9
     default: true
     depends:
       - mysql
     commands:
-      update:update: |
+      update: |
         set -eux
         # Check out a branch using the unique Tugboat ID for this repository, to
         # ensure we don't clobber an existing branch.
